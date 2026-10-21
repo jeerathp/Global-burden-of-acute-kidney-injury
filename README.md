@@ -77,7 +77,11 @@ quantile(rowSums(primary_burden$DALY), c(.025, .975))
 
 ## Licenses
 
-R code is licensed under MIT. Author-created extraction data and documentation are licensed under CC BY 4.0. UN, WHO, and IHME reference inputs retain their providers' terms. See [RIGHTS.md](RIGHTS.md) for the scope of each license and source acknowledgments.
+- **R code and project configuration:** [MIT license](LICENSE); copyright (c) 2026 Jeerath Phannajit.
+- **Original data compilation and documentation:** [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/), allowing noncommercial sharing and adaptation with appropriate attribution.
+- **UN, WHO, and IHME reference inputs:** original provider terms.
+
+See [RIGHTS.md](RIGHTS.md) for file-specific coverage and exceptions. Material previously released under CC BY 4.0 remains usable under that license; this update does not revoke those permissions.
 
 ## Citation
 

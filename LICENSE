@@ -20,5 +20,18 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-Scope: this MIT license applies to the R scripts and project configuration
-files. Data and general documentation have separate terms in RIGHTS.md.
+License scope
+
+The MIT license above applies to the R scripts and project configuration
+files. Code copyright: Copyright (c) 2026 Jeerath Phannajit.
+
+The authors' original data compilation and general documentation are offered
+under Creative Commons Attribution-NonCommercial 4.0 International
+(CC BY-NC 4.0), subject to the scope and exceptions in RIGHTS.md.
+The full license governs their reuse:
+https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+UN, WHO, and IHME reference inputs retain their original providers' terms
+and are not relicensed by this repository.
+
+This notice does not revoke permissions granted before this update.
