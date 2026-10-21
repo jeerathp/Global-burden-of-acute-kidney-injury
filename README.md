@@ -97,7 +97,7 @@ prepare_ihme_inputs(life_file = "path/to/life_table.CSV",
 
 ## Software and documentation
 
-Tested with **R 4.5.3**, **metafor 5.2-1**, **MASS 7.3-65**, **Matrix 1.7-4**, and **openxlsx 4.2.9** (input preparation only). Uncertainty calculations use 10,000 draws and seed 20250725. The analysis with locally prepared IHME inputs reproduces the finalized results; minor numerical differences may occur with other software versions.
+Tested with **R 4.5.3**, **metafor 5.2-1**, **MASS 7.3-65 and 7.3-66**, **Matrix 1.7-4**, and **openxlsx 4.2.9** (input preparation only). The complete workflow, including preparation from the official IHME filenames, was rerun in a fresh R session with newly installed packages. Uncertainty calculations use 10,000 draws and seed 20250725. The analysis with locally prepared IHME inputs reproduces the finalized results; minor numerical differences may occur with other software versions.
 
 The simulation size is set by `n_draws <- 10000` in `R/01_inputs_and_selection.R`. Script `02` samples model coefficients; script `03` combines the resulting rates with disability-weight draws to calculate YLLs, YLDs, and DALYs. Each matrix row is one simulation. The 95% uncertainty limits are the 2.5th and 97.5th percentiles; global burdens are summed across regions within each draw first. After running the analysis, you can check:
 

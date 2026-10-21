@@ -15,7 +15,11 @@ prepare_ihme_inputs <- function(
   names(life) <- c("age", "remaining_life_expectancy")
 
   # Read the original full GBD 2023 health-state worksheet, not a study output.
-  weights <- openxlsx::read.xlsx(weights_file, sheet = weights_sheet)
+  # openxlsx requires a lowercase extension; IHME's filename ends in .XLSX.
+  weights_copy <- tempfile(fileext = ".xlsx")
+  on.exit(unlink(weights_copy), add = TRUE)
+  if (!file.copy(weights_file, weights_copy)) stop("Could not copy the disability-weight workbook for reading.")
+  weights <- openxlsx::read.xlsx(weights_copy, sheet = weights_sheet)
   selected_sequelae <- c(
     "Acute glomerulonephritis",
     "Stage 5 chronic kidney disease untreated due to other and unspecified causes, with mild heart failure",
