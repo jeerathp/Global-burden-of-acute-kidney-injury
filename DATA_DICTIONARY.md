@@ -37,15 +37,19 @@ Blank numeric cells are missing values. Proportions are on a **0–1 scale**, ev
 
 Derived in R rather than included as redundant source columns: deaths, ascertainment grouping, mixed restriction, COVID period, centered year, incidence/death rates, effect sizes, variances, stage counts, and burden outputs. Country identifiers and inclusion flags are already finalized in this input; no separate lookup is needed.
 
-## Four reference inputs in `data/`
+## Included reference inputs in `data/`
 
 `wpp2024_population_2018_age18plus_thousands.csv`: `iso3c`, final `WHOregion`, and age columns `18`, `19`, …, `99`, `100+`; both sexes, 2018, populations in **thousands**. Each of 237 countries/areas appears once. Region assignments include countries without study data; only age columns are summed.
 
 `who_n17_regional_age_counts.csv`: `WHOregion`, `age_band`, and `estimated_N17_deaths`. These are derived regional sums of WHO N17 deaths in 2015–2019, with ages 18–19 allocated as two-fifths of the source 15–19 band. They are **reference age-profile inputs**, not modeled deaths or previously exported meta-analysis results. The analysis recalculates proportions within region; missing-data and registration-coverage uncertainty are not propagated.
 
-`gbd2021_standard_life_table.csv`: `age` in years and `remaining_life_expectancy` in years. This is **remaining** life expectancy at a given age, not life expectancy at birth minus age.
+## IHME inputs prepared locally in `local_inputs/`
 
-`gbd2023_stage_proxy_weights.csv`: stage number, source mean, and lower/upper reference uncertainty limits. Beta parameters are refitted in R; they are not imported from previous results. The investigator-selected proxies are acute glomerulonephritis for stage 1, untreated stage 5 chronic kidney disease with mild heart failure for stage 2, and end-stage renal disease on dialysis without anemia for stage 3. These are clinical analogues, not validated AKI-stage disability weights.
+These files are not distributed. Download the specified official releases and run `prepare_ihme_inputs.R` as described in [README.md](README.md).
+
+`gbd2021_standard_life_table.csv`: `age` in years and `remaining_life_expectancy` in years. Prepared from the GBD 2021 theoretical minimum risk life table without numerical rounding. This is **remaining** life expectancy at a given age, not life expectancy at birth minus age.
+
+`gbd2023_stage_proxy_weights.csv`: `stage` number, source `mean`, and `lower`/`upper` reference uncertainty limits, rounded to six decimal places to match the finalized analysis. Beta parameters are refitted in R; they are not imported from previous results. The investigator-selected proxies are acute glomerulonephritis for stage 1, untreated stage 5 chronic kidney disease with mild heart failure for stage 2, and end-stage renal disease on dialysis without anemia for stage 3. These are clinical analogues, not validated AKI-stage disability weights.
 
 Reference inputs are derived from United Nations World Population Prospects 2024, the WHO Mortality Database, and IHME GBD 2021/2023 data. The analysis and interpretations are those of the study authors; reference data retain their providers' terms.
 

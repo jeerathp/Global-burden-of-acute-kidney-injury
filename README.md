@@ -8,18 +8,27 @@ R code and input data for estimating acute kidney injury (AKI) incidence, associ
 2. Install the required packages once:
 
 ```r
-install.packages(c("metafor", "MASS"))
+install.packages(c("metafor", "MASS", "openxlsx"))
 ```
 
-3. Run the complete analysis:
+3. Download the two IHME source files using the official links below and place them in a new folder named `local_inputs/`. Sign in and review IHME's terms yourself if prompted. These files are not included in GitHub or the archive.
+
+4. Prepare the local inputs once:
+
+```r
+source("prepare_ihme_inputs.R")
+prepare_ihme_inputs()
+```
+
+5. Run the complete analysis:
 
 ```r
 source("run_analysis.R")
 ```
 
-The scripts run in order. Results print in the console and remain in the RStudio Environment. No result files are automatically exported. Once the packages are installed, the analysis runs offline using the included inputs.
+The scripts run in order. Results print in the console and remain in the RStudio Environment. No result files are automatically exported. After installing packages and preparing the downloaded IHME inputs, the analysis runs offline.
 
-4. Inspect the main results or display the disability-weight plot:
+6. Inspect the main results or display the disability-weight plot:
 
 ```r
 # Global and regional incidence, associated death rates, and case fatality
@@ -52,19 +61,43 @@ Rates are reported per million person-years and case fatality as a percentage. D
 
 ## Input data
 
-The `data/` folder contains five files:
+The `data/` folder contains three files:
 
 - `studies.csv`: combined extraction data, study identification, geography, and finalized inclusion flags.
 - `wpp2024_population_2018_age18plus_thousands.csv`: adult population estimates and WHO regions.
 - `who_n17_regional_age_counts.csv`: derived WHO death-age counts.
-- `gbd2021_standard_life_table.csv`: standard remaining life expectancy.
-- `gbd2023_stage_proxy_weights.csv`: stage-specific proxy disability weights.
 
 The analysis uses the finalized outcome-specific inclusion flags in `studies.csv`.
 
+### Download IHME inputs directly
+
+Use these specific releases to reproduce the reported results; do not substitute a newer GBD release.
+
+| Input | Official download instructions |
+|---|---|
+| Standard remaining life expectancy | Open [GBD 2021 Demographics 1950–2021](https://ghdx.healthdata.org/record/ihme-data/global-burden-disease-study-2021-gbd-2021-demographics-1950-2021) ([source DOI](https://doi.org/10.6069/tpkz-sh07)). Under Files, download **Theoretical Minimum Life Risk Table [CSV]**, filename `IHME_GBD_2021_DEMOG_1950_2021_TMLRT_Y2024M02D14.CSV`. |
+| Stage-specific proxy disability weights | Open [GBD 2023 Disability Weights](https://ghdx.healthdata.org/record/ihme-data/gbd-2023-disability-weights) ([source DOI](https://doi.org/10.6069/DX7H-P404)). Download `IHME_GBD_2023_DISABILITY_WEIGHTS_Y2025M10D12.XLSX`. The website currently labels this link “GBD 2023 Disability Weights [CSV]”, although the file is an Excel workbook. |
+
+Keep the downloaded filenames as shown above, including uppercase extensions on case-sensitive systems. If the provider changes access or replaces a file, contact IHME through the source page for the specified release. This repository does not provide alternative copies or bypass IHME's access requirements.
+
+`prepare_ihme_inputs.R` renames the life-table columns and selects the following rows from the original full health-state worksheet (the first sheet):
+
+- Stage 1: Acute glomerulonephritis.
+- Stage 2: Stage 5 chronic kidney disease untreated due to other and unspecified causes, with mild heart failure.
+- Stage 3: End-stage renal disease on dialysis due to other and unspecified causes, without anemia.
+
+These are investigator-selected proxies, not validated AKI-stage disability weights. The script retains the life-table precision and rounds the stage means and uncertainty limits to six decimal places, matching the finalized analysis. It creates `local_inputs/gbd2021_standard_life_table.csv` and `local_inputs/gbd2023_stage_proxy_weights.csv`. Both source and prepared IHME files stay local and are excluded from Git by `.gitignore`; do not include them in shared ZIPs.
+
+For files stored elsewhere, supply paths explicitly:
+
+```r
+prepare_ihme_inputs(life_file = "path/to/life_table.CSV",
+                    weights_file = "path/to/disability_weights.XLSX")
+```
+
 ## Software and documentation
 
-Tested with **R 4.5.3**, **metafor 5.2-1**, **MASS 7.3-65**, and **Matrix 1.7-4**. Uncertainty calculations use 10,000 draws and seed 20250725. The packaged analysis reproduced the finalized results; minor numerical differences may occur with other software versions.
+Tested with **R 4.5.3**, **metafor 5.2-1**, **MASS 7.3-65**, **Matrix 1.7-4**, and **openxlsx 4.2.9** (input preparation only). Uncertainty calculations use 10,000 draws and seed 20250725. The analysis with locally prepared IHME inputs reproduces the finalized results; minor numerical differences may occur with other software versions.
 
 The simulation size is set by `n_draws <- 10000` in `R/01_inputs_and_selection.R`. Script `02` samples model coefficients; script `03` combines the resulting rates with disability-weight draws to calculate YLLs, YLDs, and DALYs. Each matrix row is one simulation. The 95% uncertainty limits are the 2.5th and 97.5th percentiles; global burdens are summed across regions within each draw first. After running the analysis, you can check:
 
@@ -79,7 +112,8 @@ quantile(rowSums(primary_burden$DALY), c(.025, .975))
 
 - **R code and project configuration:** [MIT license](LICENSE); copyright (c) 2026 Jeerath Phannajit.
 - **Original data compilation and documentation:** [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/), allowing noncommercial sharing and adaptation with appropriate attribution.
-- **UN, WHO, and IHME reference inputs:** original provider terms.
+- **Included UN and WHO reference inputs:** original provider terms.
+- **IHME inputs:** obtained separately from IHME under its terms; not redistributed in this repository or archive.
 
 See [RIGHTS.md](RIGHTS.md) for file-specific coverage and exceptions. Material previously released under CC BY 4.0 remains usable under that license; this update does not revoke those permissions.
 

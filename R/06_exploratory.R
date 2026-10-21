@@ -44,7 +44,7 @@ print(period_endpoint_coefficients, row.names = FALSE)
 # Acute disability scenarios reuse identical primary cases and YLL draws.
 # Recreate the original RNG sequence before sampling stage weights.
 primary_for_stage <- calculate_burden(primary)
-stage_proxy <- read_input("gbd2023_stage_proxy_weights.csv")
+stage_proxy <- read_local_input("gbd2023_stage_proxy_weights.csv")
 fit_stage_beta <- function(mean, lower, upper) {
   objective <- function(log_k) {
     q <- qbeta(c(.025, .975), mean*exp(log_k), (1-mean)*exp(log_k))

@@ -3,3 +3,8 @@
 .Ruserdata
 .Rproj.user/
 Rplots.pdf
+local_inputs/
+data/gbd2021_standard_life_table.csv
+data/gbd2023_stage_proxy_weights.csv
+IHME_*
+*.zip

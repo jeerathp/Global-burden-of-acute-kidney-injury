@@ -12,7 +12,7 @@ You may share and adapt this material for noncommercial purposes under the licen
 
 This license covers only copyright and database rights held by the authors in their original compilation, annotations, and documentation. It does not create restrictions on underlying facts or public-domain material, override third-party rights, or limit uses permitted by law. The [full license text](https://creativecommons.org/licenses/by-nc/4.0/legalcode) controls.
 
-## Reference inputs
+## Included reference inputs
 
 The following files retain their original providers' terms and are not relicensed under MIT or CC BY-NC 4.0 by this package:
 
@@ -20,13 +20,21 @@ The following files retain their original providers' terms and are not relicense
 |---|---|
 | `data/wpp2024_population_2018_age18plus_thousands.csv` | United Nations, Department of Economic and Social Affairs, Population Division. [World Population Prospects 2024](https://population.un.org/wpp/). |
 | `data/who_n17_regional_age_counts.csv` | Derived regional summaries from the [WHO Mortality Database](https://www.who.int/data/data-collection-tools/who-mortality-database). Original WHO database records are not included. |
-| `data/gbd2021_standard_life_table.csv` | Global Burden of Disease Collaborative Network. [GBD 2021 Demographics 1950–2021](https://ghdx.healthdata.org/record/ihme-data/global-burden-disease-study-2021-gbd-2021-demographics-1950-2021). Institute for Health Metrics and Evaluation, 2024. |
-| `data/gbd2023_stage_proxy_weights.csv` | Selected disability weights from GBD 2023, Institute for Health Metrics and Evaluation. See [IHME data resources](https://ghdx.healthdata.org/). |
 
-Consult the original providers for current access and reuse terms. WHO supplies the source mortality data; the analyses, interpretations, and conclusions are those of the study authors and are not WHO conclusions. The selected disability weights are investigator-assigned proxies and are not validated AKI-stage disability weights.
+Consult the original providers for current access and reuse terms. WHO supplies the source mortality data; the analyses, interpretations, and conclusions are those of the study authors and are not WHO conclusions.
+
+## IHME inputs obtained separately
+
+IHME source files and the prepared life-table and stage-weight CSVs are not redistributed in this repository or its ZIP archive. Obtain the [GBD 2021 theoretical minimum risk life table](https://ghdx.healthdata.org/record/ihme-data/global-burden-disease-study-2021-gbd-2021-demographics-1950-2021) and [GBD 2023 disability weights](https://ghdx.healthdata.org/record/ihme-data/gbd-2023-disability-weights) directly from IHME, following [README.md](README.md).
+
+These separately obtained data remain subject to the [IHME free-of-charge noncommercial user agreement](https://www.healthdata.org/Data-tools-practices/data-practices/ihme-free-charge-non-commercial-user-agreement) and any dataset-specific terms. Section 2 requires UW's written permission before providing third-party downloads of IHME datasets from user-hosted facilities. Keep downloaded and prepared files in the ignored `local_inputs/` folder and exclude them from shared archives. The repository's MIT and CC BY-NC 4.0 licenses do not grant rights to redistribute IHME data.
+
+The selected disability weights are investigator-assigned proxies, not validated AKI-stage disability weights. The input preparation code is MIT-licensed; the underlying data are not.
 
 The package contains aggregate data, not individual participant records.
 
 ## License history
 
-The license notices were updated on October 22, 2026, without changing the analysis code or input data. The initial publication of version 1.0.0 at [https://doi.org/10.5281/zenodo.23541304](https://doi.org/10.5281/zenodo.23541304) offered the authors' data compilation and documentation under CC BY 4.0. Those permissions remain valid. This update does not revoke them or restrict reuse already permitted under that earlier license.
+The initial publication of version 1.0.0 at [https://doi.org/10.5281/zenodo.23541304](https://doi.org/10.5281/zenodo.23541304) offered the authors' data compilation and documentation under CC BY 4.0. Those permissions remain valid. The subsequent CC BY-NC 4.0 notice does not revoke them. Neither license notice grants rights in third-party data.
+
+On October 22, 2026, bundled IHME inputs were replaced with official download instructions and local preparation code. The analysis methods, numerical input values, and reported results are unchanged.

@@ -1,6 +1,8 @@
 # 1. Study inputs with finalized outcome-specific inclusion flags -----------
 read_input <- function(name) read.csv(file.path("data", name),
   check.names = FALSE, na.strings = c("", "NA"), fileEncoding = "UTF-8")
+read_local_input <- function(name) read.csv(file.path("local_inputs", name),
+  check.names = FALSE, na.strings = c("", "NA"), fileEncoding = "UTF-8")
 studies <- read_input("studies.csv")
 regions <- c("AFRO", "AMRO", "EMRO", "EURO", "SEARO", "WPRO")
 n_draws <- 10000 # Number of Monte Carlo draws for rates and DALY uncertainty.

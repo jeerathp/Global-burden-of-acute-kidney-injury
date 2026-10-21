@@ -4,7 +4,7 @@
 # WHO N17 records supply an age-distribution proxy, not projected death totals.
 # These derived reference counts are supplied for offline reproduction.
 age_distribution <- read_input("who_n17_regional_age_counts.csv")
-life <- read_input("gbd2021_standard_life_table.csv")
+life <- read_local_input("gbd2021_standard_life_table.csv")
 age_labels <- c("18-19", paste(seq(20, 90, 5), seq(24, 94, 5), sep = "-"), "95+")
 age_midpoints <- c(18.5, seq(22, 92, 5), 95)
 remaining_le <- approx(life$age, life$remaining_life_expectancy, xout = age_midpoints, rule = 2)$y
