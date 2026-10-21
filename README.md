@@ -74,3 +74,13 @@ quantile(rowSums(primary_burden$DALY), c(.025, .975))
 ```
 
 - [Data dictionary](DATA_DICTIONARY.md): variable definitions and units.
+
+## Licenses
+
+R code is licensed under MIT. Author-created extraction data and documentation are licensed under CC BY 4.0. UN, WHO, and IHME reference inputs retain their providers' terms. See [RIGHTS.md](RIGHTS.md) for the scope of each license and source acknowledgments.
+
+## Citation
+
+Phannajit J, Tran PNT, Harnpramukkul P, Kaewdoungtien P, Suttiruk P, Kusirisin P, Tangchitthavorngul S, Kellum JA, Srisawat N. Global burden of acute kidney injury: analysis data and R code. Version 1.0.0. Zenodo; 2026. [https://doi.org/10.5281/zenodo.23541304](https://doi.org/10.5281/zenodo.23541304).
+
+Code copyright: Jeerath Phannajit. The archive credits all study authors in manuscript order.
